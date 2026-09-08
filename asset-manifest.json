@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-photography-portio/static/css/main.192af733.css",
-    "main.js": "/react-photography-portio/static/js/main.72cfb1fa.js",
-    "index.html": "/react-photography-portio/index.html",
-    "main.192af733.css.map": "/react-photography-portio/static/css/main.192af733.css.map",
-    "main.72cfb1fa.js.map": "/react-photography-portio/static/js/main.72cfb1fa.js.map"
+    "main.css": "/portfolio/static/css/main.192af733.css",
+    "main.js": "/portfolio/static/js/main.07e7709b.js",
+    "index.html": "/portfolio/index.html",
+    "main.192af733.css.map": "/portfolio/static/css/main.192af733.css.map",
+    "main.07e7709b.js.map": "/portfolio/static/js/main.07e7709b.js.map"
   },
   "entrypoints": [
     "static/css/main.192af733.css",
-    "static/js/main.72cfb1fa.js"
+    "static/js/main.07e7709b.js"
   ]
 }
