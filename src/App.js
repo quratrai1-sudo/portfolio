@@ -1,43 +1,45 @@
 import React, { useState } from 'react';
 import './App.css';
 
-// Complete dataset mapped to your exact saved image filenames and extensions
+// Base path fix for GitHub Pages & Local Build
+const PUBLIC = process.env.PUBLIC_URL;
+
 const ALL_IMAGES = [
-  // Weddings Category (b1 to b5)
-  { id: 1, title: 'Wedding Memories 1', category: 'Weddings', url: '/images/b1.jpg' },
-  { id: 2, title: 'Wedding Memories 2', category: 'Weddings', url: '/images/b2.jpg' },
-  { id: 3, title: 'Wedding Memories 3', category: 'Weddings', url: '/images/b3.jpg' },
-  { id: 4, title: 'Wedding Memories 4', category: 'Weddings', url: '/images/b4.jpg' },
-  { id: 5, title: 'Wedding Memories 5', category: 'Weddings', url: '/images/b5.jpg' },
+  // Weddings Category
+  { id: 1, title: 'Wedding Memories 1', category: 'Weddings', url: `${PUBLIC}/images/b1.jpg` },
+  { id: 2, title: 'Wedding Memories 2', category: 'Weddings', url: `${PUBLIC}/images/b2.jpg` },
+  { id: 3, title: 'Wedding Memories 3', category: 'Weddings', url: `${PUBLIC}/images/b3.jpg` },
+  { id: 4, title: 'Wedding Memories 4', category: 'Weddings', url: `${PUBLIC}/images/b4.jpg` },
+  { id: 5, title: 'Wedding Memories 5', category: 'Weddings', url: `${PUBLIC}/images/b5.jpg` },
 
-  // Nature Category (n1 to n16 with exact extensions .jpg, .avif, .webp)
-  { id: 6, title: 'Nature Shot 1', category: 'Nature', url: '/images/n1.jpg' },
-  { id: 7, title: 'Nature Shot 2', category: 'Nature', url: '/images/n2.jpg' },
-  { id: 8, title: 'Nature Shot 3', category: 'Nature', url: '/images/n3.jpg' },
-  { id: 9, title: 'Nature Shot 4', category: 'Nature', url: '/images/n4.jpg' },
-  { id: 10, title: 'Nature Shot 5', category: 'Nature', url: '/images/n5.jpg' },
-  { id: 11, title: 'Nature Shot 6', category: 'Nature', url: '/images/n6.avif' },
-  { id: 12, title: 'Nature Shot 7', category: 'Nature', url: '/images/n7.avif' },
-  { id: 13, title: 'Nature Shot 8', category: 'Nature', url: '/images/n8.avif' },
-  { id: 14, title: 'Nature Shot 9', category: 'Nature', url: '/images/n9.avif' },
-  { id: 15, title: 'Nature Shot 10', category: 'Nature', url: '/images/n10.avif' },
-  { id: 16, title: 'Nature Shot 11', category: 'Nature', url: '/images/n11.avif' },
-  { id: 17, title: 'Nature Shot 12', category: 'Nature', url: '/images/n12.avif' },
-  { id: 18, title: 'Nature Shot 13', category: 'Nature', url: '/images/n13.webp' },
-  { id: 19, title: 'Nature Shot 14', category: 'Nature', url: '/images/n14.jpg' },
-  { id: 20, title: 'Nature Shot 15', category: 'Nature', url: '/images/n15.webp' },
-  { id: 21, title: 'Nature Shot 16', category: 'Nature', url: '/images/n16.webp' },
+  // Nature Category
+  { id: 6, title: 'Nature Shot 1', category: 'Nature', url: `${PUBLIC}/images/n1.jpg` },
+  { id: 7, title: 'Nature Shot 2', category: 'Nature', url: `${PUBLIC}/images/n2.jpg` },
+  { id: 8, title: 'Nature Shot 3', category: 'Nature', url: `${PUBLIC}/images/n3.jpg` },
+  { id: 9, title: 'Nature Shot 4', category: 'Nature', url: `${PUBLIC}/images/n4.jpg` },
+  { id: 10, title: 'Nature Shot 5', category: 'Nature', url: `${PUBLIC}/images/n5.jpg` },
+  { id: 11, title: 'Nature Shot 6', category: 'Nature', url: `${PUBLIC}/images/n6.avif` },
+  { id: 12, title: 'Nature Shot 7', category: 'Nature', url: `${PUBLIC}/images/n7.avif` },
+  { id: 13, title: 'Nature Shot 8', category: 'Nature', url: `${PUBLIC}/images/n8.avif` },
+  { id: 14, title: 'Nature Shot 9', category: 'Nature', url: `${PUBLIC}/images/n9.avif` },
+  { id: 15, title: 'Nature Shot 10', category: 'Nature', url: `${PUBLIC}/images/n10.avif` },
+  { id: 16, title: 'Nature Shot 11', category: 'Nature', url: `${PUBLIC}/images/n11.avif` },
+  { id: 17, title: 'Nature Shot 12', category: 'Nature', url: `${PUBLIC}/images/n12.avif` },
+  { id: 18, title: 'Nature Shot 13', category: 'Nature', url: `${PUBLIC}/images/n13.webp` },
+  { id: 19, title: 'Nature Shot 14', category: 'Nature', url: `${PUBLIC}/images/n14.jpg` },
+  { id: 20, title: 'Nature Shot 15', category: 'Nature', url: `${PUBLIC}/images/n15.webp` },
+  { id: 21, title: 'Nature Shot 16', category: 'Nature', url: `${PUBLIC}/images/n16.webp` },
 
-  // Portraits Category (p1 to p5)
-  { id: 22, title: 'Portrait Session 1', category: 'Portraits', url: '/images/p1.jpg' },
-  { id: 23, title: 'Portrait Session 2', category: 'Portraits', url: '/images/p2.jpg' },
-  { id: 24, title: 'Portrait Session 3', category: 'Portraits', url: '/images/p3.jpg' },
-  { id: 25, title: 'Portrait Session 4', category: 'Portraits', url: '/images/p4.jpg' },
-  { id: 26, title: 'Portrait Session 5', category: 'Portraits', url: '/images/p5.jpg' },
+  // Portraits Category
+  { id: 22, title: 'Portrait Session 1', category: 'Portraits', url: `${PUBLIC}/images/p1.jpg` },
+  { id: 23, title: 'Portrait Session 2', category: 'Portraits', url: `${PUBLIC}/images/p2.jpg` },
+  { id: 24, title: 'Portrait Session 3', category: 'Portraits', url: `${PUBLIC}/images/p3.jpg` },
+  { id: 25, title: 'Portrait Session 4', category: 'Portraits', url: `${PUBLIC}/images/p4.jpg` },
+  { id: 26, title: 'Portrait Session 5', category: 'Portraits', url: `${PUBLIC}/images/p5.jpg` },
 
-  // Events & Extra Category
-  { id: 27, title: 'Special Event', category: 'Events', url: '/images/w1.jpg' },
-  { id: 28, title: 'Studio Portfolio Shot', category: 'Events', url: '/images/images (6).jpg' }
+  // Events Category
+  { id: 27, title: 'Special Event', category: 'Events', url: `${PUBLIC}/images/w1.jpg` },
+  { id: 28, title: 'Studio Portfolio Shot', category: 'Events', url: `${PUBLIC}/images/images (6).jpg` }
 ];
 
 const SERVICES = [
@@ -109,7 +111,6 @@ function App() {
           <a href="#booking">Booking</a>
         </div>
 
-        {/* Login / Logout State Toggle Button */}
         {isLoggedIn ? (
           <button className="btn-login logged-in" onClick={handleLogout}>Logout</button>
         ) : (
@@ -117,11 +118,11 @@ function App() {
         )}
       </nav>
 
-      {/* Hero Section using local hero-bg.jpg image */}
+      {/* Hero Section */}
       <section 
         id="hero" 
         className="hero-section" 
-        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-bg.jpg')` }}
+        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${PUBLIC}/images/hero-bg.jpg')` }}
       >
         <div className="hero-content">
           <h1>Capturing Timeless Stories</h1>
@@ -137,7 +138,6 @@ function App() {
           <p>Browse through our work across different categories</p>
         </div>
 
-        {/* Category Filters */}
         <div className="filter-bar">
           {['All', 'Weddings', 'Portraits', 'Nature', 'Events'].map(cat => (
             <button
@@ -150,7 +150,6 @@ function App() {
           ))}
         </div>
 
-        {/* Image Grid */}
         <div className="gallery-grid">
           {filteredGallery.map(img => (
             <div key={img.id} className="gallery-card">
@@ -213,7 +212,7 @@ function App() {
       {/* About & Reviews Section */}
       <section id="about" className="section-container bg-light">
         <div className="about-grid">
-          <img src="/images/b1.jpg" alt="About Photographer" />
+          <img src={`${PUBLIC}/images/b1.jpg`} alt="About Photographer" />
           <div>
             <h2>About CaptureStudio</h2>
             <p>We are a passionate team of photographers and cinematographers specializing in capturing your precious moments with high definition art and emotion.</p>
