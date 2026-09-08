@@ -41,8 +41,18 @@ body {
   color: var(--sea-green);
 }
 
+.hamburger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: var(--sea-green);
+  cursor: pointer;
+}
+
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 
@@ -70,6 +80,35 @@ body {
 .btn-login:hover {
   background: var(--sea-green);
   color: var(--white);
+}
+
+/* Mobile Responsive Styling for Navigation */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .hamburger-btn {
+    display: block !important;
+  }
+
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    flex-direction: column !important;
+    align-items: center;
+    padding: 1.5rem 0;
+    gap: 1.2rem !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.open {
+    display: flex !important;
+  }
 }
 
 /* Hero Section */
@@ -422,31 +461,4 @@ body {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-}
-/* Mobile Responsive Fix for Navbar */
-@media screen and (max-width: 768px) {
-  /* Header section flex adjustment */
-  header, nav, .navbar, .header {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 10px 15px !important;
-  }
-
-  /* Links container mobile view */
-  nav a, .nav-links a, header a {
-    font-size: 12px !important;
-    padding: 4px 6px !important;
-  }
-
-  /* Break links into scrollable or neat line if too long */
-  header nav, .nav-links, nav ul {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    justify-content: center !important;
-    width: 100% !important;
-    margin-top: 10px !important;
-  }
 }
