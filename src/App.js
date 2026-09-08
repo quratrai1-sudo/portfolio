@@ -67,6 +67,7 @@ function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [booking, setBooking] = useState({ name: '', email: '', phone: '', date: '', pkg: 'Signature Package' });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleFavorite = (id) => {
     if (favorites.includes(id)) {
@@ -98,24 +99,31 @@ function App() {
 
   return (
     <div className="app">
-      {/* Navigation Bar */}
+      {/* Responsive Navigation Bar */}
       <nav className="navbar">
         <div className="logo">CaptureStudio</div>
-        <div className="nav-links">
-          <a href="#hero">Home</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#services">Services</a>
-          <a href="#packages">Packages</a>
-          <a href="#about">About</a>
-          <a href="#favorites">Favorites ({favorites.length})</a>
-          <a href="#booking">Booking</a>
-        </div>
+        
+        {/* Mobile Hamburger Button */}
+        <button className="hamburger-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          ☰
+        </button>
 
-        {isLoggedIn ? (
-          <button className="btn-login logged-in" onClick={handleLogout}>Logout</button>
-        ) : (
-          <button className="btn-login" onClick={() => setShowLoginModal(true)}>Login</button>
-        )}
+        {/* Links Container */}
+        <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+          <a href="#hero" onClick={() => setIsMenuOpen(false)}>Home</a>
+          <a href="#gallery" onClick={() => setIsMenuOpen(false)}>Gallery</a>
+          <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
+          <a href="#packages" onClick={() => setIsMenuOpen(false)}>Packages</a>
+          <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
+          <a href="#favorites" onClick={() => setIsMenuOpen(false)}>Favorites ({favorites.length})</a>
+          <a href="#booking" onClick={() => setIsMenuOpen(false)}>Booking</a>
+
+          {isLoggedIn ? (
+            <button className="btn-login logged-in" onClick={() => { handleLogout(); setIsMenuOpen(false); }}>Logout</button>
+          ) : (
+            <button className="btn-login" onClick={() => { setShowLoginModal(true); setIsMenuOpen(false); }}>Login</button>
+          )}
+        </div>
       </nav>
 
       {/* Hero Section */}
